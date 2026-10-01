@@ -106,6 +106,18 @@ pip install -r dashboard/requirements.txt
 streamlit run dashboard/app.py
 ```
 
+## Deploy the dashboard (Streamlit Community Cloud, free)
+
+1. Sign in at [share.streamlit.io](https://share.streamlit.io) with GitHub. Click **Create app**, then **Deploy a public app from GitHub**.
+2. Repository `Rupkatha422/grid-demand-pipeline`, branch `main`, main file `dashboard/app.py`.
+3. **Advanced settings:** Python **3.11**. Under **Secrets**, add:
+   ```toml
+   GROQ_API_KEY = "your_groq_key"
+   ```
+4. Deploy. The app reads `data/exports/` from the repo. To refresh it, run the Airflow DAG locally, then commit and push `data/exports/`.
+
+For local runs, keys go in `.env`, or in `.streamlit/secrets.toml`. Both are git-ignored.
+
 ## Repository layout
 
 ```
