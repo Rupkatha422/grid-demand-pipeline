@@ -1,0 +1,8 @@
+grid_demand:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      # Relative to the dbt/ folder, so it works both in Docker (/opt/airflow/dbt) and locally.
+      path: "{{ env_var('DUCKDB_PATH', '../data/warehouse.duckdb') }}"
+      threads: 1

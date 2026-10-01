@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: fct_hourly_demand
+    description: One row per UTC hour of PJM demand, joined to average PJM-area temperature.
+    columns:
+      - name: hour_utc
+        tests: [not_null, unique]
+      - name: date_local
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_local
+      - name: demand_mwh
+        tests: [not_null]
+      - name: avg_temperature_f
+        description: Null for the newest hours, until Open-Meteo's archive catches up.
+        tests:
+          - not_null:
+              config:
+                severity: warn
+
+  - name: dim_date
+    description: One row per Eastern-time calendar date in the data.
+    columns:
+      - name: date_local
+        tests: [not_null, unique]
+      - name: season
+        tests:
+          - accepted_values:
+              arguments:
+                values: [Winter, Spring, Summer, Fall]

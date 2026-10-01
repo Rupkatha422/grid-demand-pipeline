@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: stg_demand
+    description: Hourly PJM demand with UTC and Eastern timestamps.
+    columns:
+      - name: hour_utc
+        tests: [not_null, unique]
+      - name: hour_local
+        tests: [not_null]
+      - name: demand_mwh
+        description: Megawatt-hours consumed in the hour.
+        tests:
+          - not_null
+          # PJM demand is roughly 60k–160k MW. Values outside a wide band mean bad data.
+          - accepted_range:
+              arguments:
+                min_value: 20000
+                max_value: 200000
+
+  - name: stg_weather
+    description: Hourly temperature per city.
+    tests:
+      - unique_combination:
+          arguments:
+            columns: [city, hour_utc]
+    columns:
+      - name: city
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [philadelphia, newark, washington_dc]
+      - name: hour_utc
+        tests: [not_null]
+      - name: temperature_f
+        tests:
+          - not_null
+          - accepted_range:
+              arguments:
+                min_value: -30
+                max_value: 120

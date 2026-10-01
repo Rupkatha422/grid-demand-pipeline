@@ -1,0 +1,11 @@
+version: 2
+
+seeds:
+  - name: known_demand_gaps
+    description: >
+      Hour ranges where the source (EIA) has no PJM demand values. Verified against the API.
+      assert_no_missing_demand_hours ignores these, so any NEW gap still fails the build.
+    config:
+      column_types:
+        gap_start_utc: timestamp
+        gap_end_utc: timestamp

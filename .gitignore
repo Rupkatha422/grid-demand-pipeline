@@ -1,0 +1,20 @@
+.env
+logs/*
+!logs/.gitkeep
+config/airflow.cfg
+data/*
+!data/raw/
+data/raw/*
+!data/raw/.gitkeep
+!data/exports/
+# The exported mart IS committed so Streamlit Community Cloud can read it.
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+.user.yml
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+*.duckdb
+*.duckdb.wal

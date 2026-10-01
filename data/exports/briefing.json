@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-30",
+  "headline": "Wednesday demand down, but still above similar\u2011temp days",
+  "summary": "Peak demand reached 103,861 MWh at 6\u202fPM with a temperature of 74\u202f\u00b0F, while average demand was 91,579 MWh. Demand was 14.5% below the same weekday average over the past four weeks and 11.6% below the prior 7\u2011day average. However, it was 3.5% above days with similar temperatures. The peak ranks 216th out of 365 days.",
+  "facts": {
+    "date_local": "2026-09-30",
+    "day_name": "Wednesday",
+    "peak_mwh": 103861.0,
+    "peak_hour": "6 PM",
+    "temp_at_peak_f": 74.0,
+    "avg_mwh": 91579.0,
+    "max_temp_f": 75.5,
+    "pct_vs_same_weekday_4wk": -14.5,
+    "pct_7day_vs_prior_7day": -11.6,
+    "pct_vs_similar_temp_days": 3.5,
+    "peak_rank_365d": 216,
+    "days_in_rank_window": 365
+  },
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-10-01T03:28:18+00:00"
+}

@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: main
+    description: Tables loaded by the Airflow load_to_duckdb task.
+    tables:
+      - name: raw_demand
+        description: Hourly PJM demand from the EIA API, one row per UTC hour.
+        loaded_at_field: loaded_at
+        freshness:
+          warn_after: {count: 36, period: hour}
+          error_after: {count: 72, period: hour}
+      - name: raw_weather
+        description: Hourly temperature per city from Open-Meteo, one row per city per UTC hour.

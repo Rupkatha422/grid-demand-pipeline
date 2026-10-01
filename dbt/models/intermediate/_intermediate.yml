@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: int_weather_hourly_avg
+    description: Average temperature across PJM cities per UTC hour.
+    columns:
+      - name: hour_utc
+        tests: [not_null, unique]
+      - name: cities_reporting
+        tests:
+          - accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 3
