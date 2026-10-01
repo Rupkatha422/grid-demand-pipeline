@@ -62,7 +62,8 @@ st.markdown(f"""
   .brief h3 {{ font-size: 1.15rem; margin: 10px 0 6px; padding: 0; color: {INK}; }}
   .brief p {{ margin: 0; color: #2d3036; line-height: 1.55; }}
   .brief .meta {{ color: {INK_MUTED}; font-size: .75rem; margin-top: 10px; }}
-  .footer {{ color: {INK_MUTED}; font-size: .8rem; margin-top: 28px; border-top: 1px solid #e7e8eb; padding-top: 12px; }}
+  .footer {{ color: {INK_MUTED}; font-size: .8rem; line-height: 1.6; margin-top: 28px; border-top: 1px solid #e7e8eb; padding-top: 12px; }}
+  .footer a {{ color: {INK_MUTED}; text-decoration: underline; }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -365,7 +366,12 @@ with tab_data:
 
 st.markdown(f"""
 <div class="footer">
-  Data: U.S. Energy Information Administration (EIA-930) · Open-Meteo historical weather.
-  Built with Airflow, DuckDB, dbt and Streamlit. Last data point: {df['hour_local'].max():%b %-d, %Y %-I %p} Eastern.
+  Demand data source: U.S. Energy Information Administration, Hourly Electric Grid Monitor (EIA-930),
+  <a href="https://www.eia.gov/opendata/" target="_blank">eia.gov</a> ({df['hour_local'].max():%b %Y}).
+  Weather data by <a href="https://open-meteo.com/" target="_blank">Open-Meteo.com</a>, licensed under
+  <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>; modified (averaged across
+  Philadelphia, Newark and Washington DC, converted to °F).<br>
+  Built with Airflow, DuckDB, dbt and Streamlit · AI text by gpt-oss-120b via Groq · Non-commercial portfolio project.
+  Last data point: {df['hour_local'].max():%b %-d, %Y %-I %p} Eastern.
 </div>
 """, unsafe_allow_html=True)

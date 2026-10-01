@@ -78,6 +78,15 @@ _TODO: add a screenshot of the Airflow graph view to `docs/` and link it here._
 
 On the first real backfill, `assert_no_missing_demand_hours` failed the build with 47 missing hours. Investigation showed the pipeline was fine: EIA returns **null PJM demand values for about a day around two daylight-saving changes** (Nov 5, 2023 and Mar 10, 2024). Those ranges are now recorded, with the reason, in the `known_demand_gaps` dbt seed. The test ignores them but still fails on any new gap, so bad data never reaches the dashboard without anyone noticing.
 
+## Data sources and licenses
+
+| Source | What's used | License and terms | Attribution |
+|---|---|---|---|
+| [U.S. Energy Information Administration](https://www.eia.gov/opendata/), Hourly Electric Grid Monitor (EIA-930) | Hourly PJM demand | Public domain: U.S. government data, [free to reuse](https://www.eia.gov/about/copyrights_reuse.php) | "Source: U.S. Energy Information Administration (Oct 2026)" |
+| [Open-Meteo.com](https://open-meteo.com/) historical weather API | Hourly temperature for Philadelphia, Newark and Washington DC | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The free API is for [non-commercial use only](https://open-meteo.com/en/terms) | "Weather data by Open-Meteo.com". **Modified:** averaged across the 3 cities and converted from °C to °F |
+
+This is a non-commercial portfolio project, with no ads or subscriptions. The committed file `data/exports/fct_hourly_demand.parquet` contains data derived from both sources under the terms above. The same attribution appears in the dashboard footer.
+
 ## How to run it
 
 Prerequisites: Docker Desktop (4GB+ RAM) and a free [EIA API key](https://www.eia.gov/opendata/).
